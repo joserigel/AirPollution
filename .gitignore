@@ -1,6 +1,10 @@
 # Environments
 .env
 
+# Model
+models
+
+
 # Python
 env
 __pycache__

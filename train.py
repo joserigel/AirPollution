@@ -3,6 +3,7 @@ from dataset import dataset, normalize, split_to_batches
 from tqdm import tqdm
 from torch import nn, optim
 import torch
+import os
 import matplotlib.pyplot as plt
 
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
@@ -66,6 +67,10 @@ if __name__ == "__main__":
         optimizer = optim.SGD(model.parameters(), 0.01, 0.003)
         running_loss += train_one_epoch(model, train_dataset, optimizer, loss_fn)
         losses.append(running_loss)
+
+    if not os.path.isdir("models"):
+        os.makedirs("models")
+    torch.save(model.state_dict(), "models/model.pth")
     
     plt.plot(losses)
     plt.show()
